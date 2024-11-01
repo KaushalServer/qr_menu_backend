@@ -6,7 +6,7 @@ const protectRoute = async (req, res, next) => {
         // console.log(req);
         
         const token = req.cookies.jwt;
-        // console.log("Middleware token:- ", token);
+        console.log("Middleware token:- ", token);
 
         if(!token){
             return res.status(400).json({

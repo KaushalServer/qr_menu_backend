@@ -104,14 +104,14 @@ export const getMenu = async (req, res) => {
         }
 
         // url condition
-        // console.log(req.body);
+        console.log(req.body);
 
 
         const { restaurantSlug } = req.body;
-        // console.log("Slug hai:- ", restaurantSlug);
+        console.log("Slug hai:- ", restaurantSlug);
 
         const restaurant = await Restaurant.findOne({ restaurantSlug });
-        // console.log(restaurant);
+        console.log(restaurant);
 
 
         if (!restaurant) {
