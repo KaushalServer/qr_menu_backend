@@ -15,10 +15,17 @@ const port = process.env.PORT || 4500;
 app.use(express.json());
 app.use(cookieParser());
 
-app.use(cors({
+// CORS issue
+const corsOptions = {
     origin: ['http://localhost:5173', 'https://qr-menu-frontend-five.vercel.app'],
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // trying this because of method not allowed error
     credentials: true,
-}));
+}
+
+app.use(cors(corsOptions));
+
+// Handle preflight requests for all routes
+app.options('*', cors(corsOptions));
 
 app.use("/api/auth", authRoutes);
 app.use("/api/menu", menuRoutes);
