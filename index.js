@@ -17,8 +17,8 @@ app.use(cookieParser());
 
 // CORS issue
 const corsOptions = {
-    origin: ['http://localhost:5173', 'https://qr-menu-frontend-five.vercel.app'],
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // trying this because of method not allowed error
+    origin: 'http://localhost:5173',
+    // methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // trying this because of method not allowed error
     credentials: true,
 }
 
