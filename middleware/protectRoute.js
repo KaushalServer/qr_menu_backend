@@ -4,9 +4,7 @@ import User from "../models/user.model.js";
 const protectRoute = async (req, res, next) => {
     try {
         // console.log(req);
-        
-        const token = req.cookies.jwt;
-        console.log("Middleware token:- ", token);
+        const token = req.headers.authorization.split(" ")[1];
 
         if(!token){
             return res.status(400).json({
@@ -23,9 +21,7 @@ const protectRoute = async (req, res, next) => {
             });
         }
 
-        const user = await User.findById(decoded.userId);
-        // console.log(user);
-        
+        const user = await User.findById(decoded.id);
 
         if(!user){
             return res.status(404).json({

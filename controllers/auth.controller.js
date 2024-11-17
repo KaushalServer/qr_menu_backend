@@ -2,6 +2,7 @@ import User from "../models/user.model.js";
 import bcrypt from 'bcryptjs';
 import generateTokenAndSetCookie from "../utils/generateToken.js";
 import Restaurant from "../models/restaurant.model.js";
+import jwt from "jsonwebtoken";
 
 // const /
 
@@ -99,8 +100,11 @@ export const signin = async (req, res) => {
         }
 
         // if everything is right then generate token.
-        generateTokenAndSetCookie(user._id, res);
+        // generateTokenAndSetCookie(user._id, res);
 
+        const token = jwt.sign({id:user._id}, process.env.JWT_TOKEN, {
+            expiresIn: "15 days" // expires in 15 days
+        });
         // Populate the restaurant data
         const restaurant = await Restaurant.findById(user.restaurant_id);
         if (!restaurant) {
@@ -113,6 +117,7 @@ export const signin = async (req, res) => {
             restaurant_id: user.restaurant_id,
             restaurantName: restaurant.restaurantName,
             restaurantSlug: restaurant.restaurantSlug,
+            access_token: token,
         });
 
     } catch (error) {
